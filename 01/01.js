@@ -6,12 +6,21 @@ const readInterface = readline.createInterface({
     input: fs.createReadStream('./input.txt'),
 });
 
-const calculateFuel = input => {
-    return Math.floor(input / 3) - 2;
+const algorithm = input  => {
+  return Math.floor(input / 3) - 2;
 }
 
-readInterface.on('line', (line) => {
-    console.log(calculateFuel(line));
-    total += calculateFuel(line);
-    console.log(total)
-})
+const calculateFuel = input => {
+    const baseMass = algorithm(input);
+    let fuelMass = algorithm(baseMass);
+    let total = fuelMass + baseMass;
+    while(fuelMass >= 9) {
+        fuelMass = algorithm(fuelMass)
+        total += fuelMass;
+    }
+    return total;
+}
+
+ readInterface.on('line', (line) => {
+     total += calculateFuel(line);
+ })
