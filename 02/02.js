@@ -1,27 +1,29 @@
 const fs = require('fs');
 const path = require('path');
-
 const filePath = path.basename('input.txt');
 
-let intValue;
-fs.readFile(filePath, { encoding: 'utf-8' }, (err, data) => {
-  if (!err) {
-    const values = data.split(',');
-    intValue = values.map((x) => parseInt(x, 10));
-  } else {
-    console.log(err);
-  }
+const fileData = fs.readFileSync(filePath, { encoding: 'utf-8' }, (err, data) => {
 });
 
-const intCode = (input) => {
-  input.forEach((element) => {
-    switch (element) {
-      case 99:
-        return;
-      case 1:
-        input[element + 3] = input[element + 2] + input[element + 1];
-      case 2:
-        input[element + 3] = input[element + 2] * input[element + 1];
-    }
-  });
-};
+const list = fileData.split(',').map((x) => parseInt(x));
+
+const calculateCodes = input => {
+  for(let i = 0; i < input.length - 1; i++) {
+      switch (input[i]) {
+        case 1:
+          input[input[i + 3]] = input[input[i + 2]] + input[input[i + 1]];
+          i+=3;
+          break;
+        case 2:
+          input[input[i + 3]] = input[input[i + 2]] * input[input[i + 1]];
+          i+=3;
+          break; 
+        case 99:
+          console.log(`input: ${input}`)
+          return;
+      }
+  }
+  console.log(input)
+}
+
+calculateCodes(list);
