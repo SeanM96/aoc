@@ -1,0 +1,30 @@
+{
+  "name": "sean-martin-aoc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --fix",
+    "prettier":"prettier --write"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SeanM96/aoc.git"
+  },
+  "author": "Sean Martin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SeanM96/aoc/issues"
+  },
+  "homepage": "https://github.com/SeanM96/aoc#readme",
+  "dependencies": {
+    "eslint-config-prettier": "^6.7.0",
+    "prettier": "^1.19.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.19.1"
+  }
+}
