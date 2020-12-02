@@ -1,5 +1,7 @@
 const input = require('./input.json');
 
+let count = 0;
+
 function partOne() {
     input.forEach(element => {
         const formattedElement = element.replace(':', '').split(' ');
