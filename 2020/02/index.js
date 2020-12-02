@@ -1,33 +1,28 @@
 const input = require('./input.json');
 
-let count = 0;
-const formattedInput = input.map(element => {
-    return element.replace(':', '').split(' ');
-});
-
 function partOne() {
-    formattedInput.forEach(element => {
-        const minNum = element[0].match(/^(\d*)-/)[1];
-        const maxNum = element[0].match(/-(\d*)/)[1];
-        const character = element[1];
-        const password = element[2];
+    input.forEach(element => {
+        const formattedElement = element.replace(':', '').split(' ');
+        const minNum = formattedElement[0].match(/^(\d*)-/)[1];
+        const maxNum = formattedElement[0].match(/-(\d*)/)[1];
+        const character = formattedElement[1];
+        const password = formattedElement[2];
 
-        const numOfTimes = element[2].split(element[1]).length - 1;
-        const validPassword = numOfTimes > minNum && numOfTimes < maxNum;
+        const numOfTimes = password.split(character).length - 1;
         if (numOfTimes >= minNum && numOfTimes <= maxNum) {
             count++;
-            console.log(count);
         }
     });
     console.log(count)
 }
 
 function partTwo() {
-    formattedInput.forEach(element => {
-        const firstPosition = element[0].match(/^(\d*)-/)[1];
-        const secondPosition = element[0].match(/-(\d*)/)[1];
-        const character = element[1];
-        const password = [element[2].slice(0, 0), ' ', element[2].slice(0)].join('');
+    input.forEach(element => {
+        const formattedElement = element.replace(':', '').split(' ');
+        const firstPosition = formattedElement[0].match(/^(\d*)-/)[1];
+        const secondPosition = formattedElement[0].match(/-(\d*)/)[1];
+        const character = formattedElement[1];
+        const password = [formattedElement[2].slice(0, 0), ' ', formattedElement[2].slice(0)].join('');
 
         if (password[firstPosition] === character) {
             if (password[secondPosition] !== character && password[secondPosition] !== undefined) {
@@ -43,7 +38,10 @@ function partTwo() {
             }
         }
     });
+    console.log(count)
 }
-
+partOne();
+count = 0;
+partTwo();
 
 
