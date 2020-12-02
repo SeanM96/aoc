@@ -19,11 +19,10 @@ function partOne() {
 function partTwo() {
     const results = [];
     return input.every(item => {
-        const remainder = total - item;
         const otherElement = input.find(newItem => {
             return input.find(newerItem => {
                 const result = newItem + newerItem + item === total && newerItem;
-                if(result) {
+                if (result) {
                     results.push(result);
                     results.push(newItem)
                 }
