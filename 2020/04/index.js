@@ -18,10 +18,8 @@ const inputObjects = formattedInput.map((string) => {  // for each string in arr
 
 const validEcl = ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth'];
 const pidRegex = "^\\d{9}$";
-const hexRegex = '(#[0-9a-f]{6})';
-const numRegex = '/\d+/g';
-const wordRegex = '/[a-z]+/g';
-
+const hexRegex = '(#[0-9a-fA-F]{6})';
+const hgtRegex = /^(5[9](in))|^(6[0-9](in))|^(7[0-6](in))|^(15[0-9](cm))|^(16[0-9](cm))|^(17[0-9](cm))|^(18[0-9](cm))|^(19[0-3](cm))/g
 
 function passportFilter(passport) {
     let valid = true;
@@ -51,13 +49,7 @@ function passportFilter(passport) {
         console.log('INVALID HAIR COLOR: ' + hcl)
         valid = false;
     }
-    const height = hgt.match(numRegex) && hgt.match(numRegex)[0];
-    const measurement = hgt.match(wordRegex) && hgt.match(wordRegex)[0];
-    if (measurement === 'cm' && height < 150 || measurement === 'cm' && hgt > 193) {
-        valid = false;
-    }
-
-    if (measurement === 'in' && height < 59 || measurement === 'in' && hgt > 76) {
+    if(!hgt.match(hgtRegex)) {
         valid = false;
     }
     return valid;
@@ -74,4 +66,4 @@ function partOne() {
 };
 
 const filtered = partOne().filter(passport => passportFilter(passport)).length;
-console.log(new RegExp(hexRegex).test('4a1444'));
+console.log(filtered)
