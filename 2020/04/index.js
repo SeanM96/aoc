@@ -22,37 +22,29 @@ const hexRegex = '(#[0-9a-fA-F]{6})';
 const hgtRegex = /^(5[9](in))|^(6[0-9](in))|^(7[0-6](in))|^(15[0-9](cm))|^(16[0-9](cm))|^(17[0-9](cm))|^(18[0-9](cm))|^(19[0-3](cm))/g
 
 function passportFilter(passport) {
-    let valid = true;
     const { byr, iyr, eyr, hgt, hcl, ecl, pid } = passport;
-    console.log(passport)
     if (byr < 1920 || byr > 2002) {
-        console.log('INVALID BIRTH YEAR: ' + byr)
-        valid = false;
+        return false;
     }
     if (iyr < 2010 || iyr > 2020) {
-        console.log('INVALID ISSUE YEAR: ' + iyr)
-        valid = false;
+        return false;
     }
     if (eyr < 2020 || eyr > 2030) {
-        console.log('INVALID EXPIRATION YEAR: ' + eyr)
-        valid = false;
+        return false;
     }
     if (!validEcl.includes(ecl)) {
-        console.log('INVALID EYE COLOR: ' + ecl)
-        valid = false;
+        return false;
     }
     if (!new RegExp(pidRegex).test(pid)) {
-        console.log('INVALID PID: ' + pid)
-        valid = false;
+        return false;
     }
     if (!new RegExp(hexRegex).test(hcl)) {
-        console.log('INVALID HAIR COLOR: ' + hcl)
-        valid = false;
+        return false;
     }
     if(!hgt.match(hgtRegex)) {
-        valid = false;
+        return false;
     }
-    return valid;
+    return true;
 }
 function partOne() {
     return inputObjects.filter(passport => {
@@ -65,5 +57,6 @@ function partOne() {
     });
 };
 
-const filtered = partOne().filter(passport => passportFilter(passport)).length;
-console.log(filtered)
+const part2 = partOne().filter(passport => passportFilter(passport)).length;
+console.log(partOne().length);
+console.log(part2)
