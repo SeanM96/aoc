@@ -6,6 +6,7 @@ const columnLower = 'L'
 const columnUpper = 'R'
 let rowRanges = [0, 127]
 let columnRanges = [0,7]
+
 const newInput = input.map(code => {
     rowRanges = [0, 127];
     columnRanges = [0,7]
@@ -40,4 +41,3 @@ sorted.every((element, index) => {
     }
     return true
 });
-console.log(thisOne)
