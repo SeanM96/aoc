@@ -3,24 +3,24 @@ const input = fs.readFileSync('./input.txt').toString();
 const formattedInput = input.split('\n\n').map(e => (e.split('\n')));
 
 const partOne = formattedInput.map(group => group.join('')).map(group => {
-    const set = new Set()
+    const answers = new Set()
     for (charIndex in group) {
-        set.add(group[charIndex])
+        answers.add(group[charIndex])
     }
-    return set.size
+    return answers.size
 }).reduce((a, b) => a + b);
 
-const partTwo = formattedInput.map( group => {
-    const set = new Set();
+const partTwo = formattedInput.map(group => {
+    const answers = new Set();
     const sizeOfGroup = group.length;
-    const joined = group.join('');
-    for (charIndex in joined) {
-        const numOfTimes = joined.split(joined[charIndex]).length - 1;
-        if(numOfTimes === sizeOfGroup) {
-            set.add(joined[charIndex])
+    const wholeGroup = group.join('');
+    for (charIndex in wholeGroup) {
+        const numOfTimes = wholeGroup.split(wholeGroup[charIndex]).length - 1;
+        if (numOfTimes === sizeOfGroup) {
+            answers.add(wholeGroup[charIndex])
         }
     }
-    return set.size;
+    return answers.size;
 }).reduce((a, b) => a + b);;
 
 console.log(partOne)
